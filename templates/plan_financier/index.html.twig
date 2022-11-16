@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}PlanFinancier index{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <a href="{{ path('app_plan_financier_new') }}" class="btn btn-primary" style="float: right;">Plan Financier
+                    </a><br>
+
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Motif</th>
+                        <th>Montant</th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for plan_financier in plan_financiers %}
+                        <tr>
+                            <td>{{ plan_financier.id }}</td>
+                            <td>{{ plan_financier.motif }}</td>
+                            <td>{{ plan_financier.montant }}</td>
+                            <td>
+                                <a href="{{ path('app_plan_financier_show', {'id': plan_financier.id}) }}"><button type="button" class="btn btn-primary"><i class="far fa-eye"></i></button></a>
+                                <a href="{{ path('app_plan_financier_edit', {'id': plan_financier.id}) }}"><button type="button" class="btn btn-success"><i class="fas fa-edit"></i></button></a>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="4">no records found</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

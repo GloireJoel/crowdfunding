@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}PlanAction index{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <a href="{{ path('app_plan_action_new') }}" class="btn btn-primary" style="float: right;">Plan
+                    Action
+                </a><br>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Activite</th>
+                <th>Duree_activite</th>
+                <th>Date_debut</th>
+                <th>Date_fin</th>
+                <th>Description</th>
+                <th>Objectif</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for plan_action in plan_actions %}
+            <tr>
+                <td>{{ plan_action.id }}</td>
+                <td>{{ plan_action.activite }}</td>
+                <td>{{ plan_action.dureeActivite }}</td>
+                <td>{{ plan_action.dateDebut ? plan_action.dateDebut|date('Y-m-d') : '' }}</td>
+                <td>{{ plan_action.dateFin ? plan_action.dateFin|date('Y-m-d') : '' }}</td>
+                <td>{{ plan_action.description }}</td>
+                <td>{{ plan_action.objectif }}</td>
+                <td>
+                    <a href="{{ path('app_plan_action_show', {'id': plan_action.id}) }}"><button type="button" class="btn btn-primary"><i class="far fa-eye"></i></button></a>
+                    <a href="{{ path('app_plan_action_edit', {'id': plan_action.id}) }}"><button type="button" class="btn btn-success"><i class="fas fa-edit"></i></button></a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

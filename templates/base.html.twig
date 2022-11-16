@@ -1,19 +1,93 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
-        {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
-        {% block stylesheets %}
-            {{ encore_entry_link_tags('app') }}
-        {% endblock %}
+<html lang="en">
+<head>
+    <title>CwdFunding</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-        {% block javascripts %}
-            {{ encore_entry_script_tags('app') }}
-        {% endblock %}
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-    </body>
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+          integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+</head>
+<body>
+
+<div class="wrapper d-flex align-items-stretch">
+    <nav id="sidebar">
+        <div class="custom-menu">
+            <button type="button" id="sidebarCollapse" class="btn btn-primary">
+            </button>
+        </div>
+        <div class="img bg-wrap text-center py-4">
+            <div class="user-logo">
+                <h3>Mchango System</h3>
+            </div>
+        </div>
+        <ul class="list-unstyled components mb-5">
+            <li class="active">
+                <a href="{{ path('home') }}"><span class="fa fa-home mr-3"></span> Home</a>
+            </li>
+            {% if is_granted('ROLE_SUPER_ADMIN') %}
+                <li>
+                    <a href="{{ path('app_user_index') }}"><span class="fa fa-user mr-3"></span> Utilisateurs</a>
+                </li>
+            {% endif %}
+            <li>
+                <a href="{{ path('app_projet_index') }}"><span class="fa fa-book mr-3"></span> Projets</a>
+            </li>
+            <li>
+                <a href="{{ path('app_plan_financier_index') }}"><span class="fa fa-book mr-3"></span> Plans Financiers</a>
+            </li>
+            <li>
+                <a href="{{ path('app_plan_action_index') }}"><span class="fa fa-book mr-3"></span>Plans d'actions</a>
+            </li>
+            <li>
+                <a href="{{ path('app_plan_communication_index') }}"><span class="fa fa-book mr-3"></span>Plans de
+                    communication</a>
+            </li>
+            <li>
+                <a href="{{ path('app_categorie_index') }}"><span class="fa fa-book mr-3"></span>Catégorie</a>
+            </li>
+
+            <li>
+                <a href="/logout"><span class="fa fa-sign-out mr-3"></span> Se Déconnecter</a>
+            </li>
+            <li>
+                <a href="#"><span class=""></span></a>
+            </li>
+            <li>
+                <a href="#"><span class=""></span></a>
+            </li>
+            <li>
+                <a href="#"><span class=""></span></a>
+            </li>
+            <li>
+                <a href="#"><span class=""></span></a>
+            </li>
+            <li>
+                <a href="#"><span class=""></span></a>
+            </li>
+            <li>
+                <a href="#"><span class=""></span></a>
+            </li>
+            <li>
+                <a href="#"><span class=""></span></a>
+            </li>
+        </ul>
+
+    </nav>
+
+    {% block body %}
+
+    {% endblock %}
+
+</div>
+
+<script src="/js/jquery.min.js"></script>
+<script src="/js/popper.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+</body>
 </html>

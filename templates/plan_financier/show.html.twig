@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}PlanFinancier{% endblock %}
+
+{% block body %}
+    <h1>PlanFinancier</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ plan_financier.id }}</td>
+            </tr>
+            <tr>
+                <th>Motif</th>
+                <td>{{ plan_financier.motif }}</td>
+            </tr>
+            <tr>
+                <th>Montant</th>
+                <td>{{ plan_financier.montant }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_plan_financier_index') }}">back to list</a>
+
+    <a href="{{ path('app_plan_financier_edit', {'id': plan_financier.id}) }}">edit</a>
+
+    {{ include('plan_financier/_delete_form.html.twig') }}
+{% endblock %}

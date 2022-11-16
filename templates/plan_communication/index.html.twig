@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}PlanCommunication index{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <a href="{{ path('app_plan_communication_new') }}" class="btn btn-primary" style="float: right;">Plan
+                    Financier
+                </a><br>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Objectif</th>
+                        <th>Cible</th>
+                        <th>actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for plan_communication in plan_communications %}
+                        <tr>
+                            <td>{{ plan_communication.id }}</td>
+                            <td>{{ plan_communication.objectif }}</td>
+                            <td>{{ plan_communication.cible }}</td>
+                            <td>
+                                <a href="{{ path('app_plan_communication_show', {'id': plan_communication.id}) }}"><button type="button" class="btn btn-primary"><i class="far fa-eye"></i></button></a>
+                                <a href="{{ path('app_plan_communication_edit', {'id': plan_communication.id}) }}"><button type="button" class="btn btn-success"><i class="fas fa-edit"></i></button></a>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="4">no records found</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,23 @@
+<div class="container" style="margin-left: 40px;">
+    <div class="row">
+        {{ form_start(form, {
+            'attr': {
+                'novalidate': 'novalidate',
+                'class': 'col-lg-8'
+            }
+        })
+        }}
+        {{ form_row(form.nom) }}
+        {{ form_row(form.prenom) }}
+        {{ form_row(form.genre) }}
+        {{ form_row(form.email) }}
+        {{ form_row(form.password) }}
+        {{ form_row(form.localisation) }}
+        {{ form_row(form.image) }}
+        {{ form_row(form.desciption) }}
+
+
+        <button type="submit" class="btn btn-primary">Enregistrer</button>
+        {{ form_end(form) }}
+    </div>
+</div>

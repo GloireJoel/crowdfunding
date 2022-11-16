@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}PlanAction{% endblock %}
+
+{% block body %}
+    <h1>PlanAction</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ plan_action.id }}</td>
+            </tr>
+            <tr>
+                <th>Activite</th>
+                <td>{{ plan_action.activite }}</td>
+            </tr>
+            <tr>
+                <th>Duree_activite</th>
+                <td>{{ plan_action.dureeActivite }}</td>
+            </tr>
+            <tr>
+                <th>Date_debut</th>
+                <td>{{ plan_action.dateDebut ? plan_action.dateDebut|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Date_fin</th>
+                <td>{{ plan_action.dateFin ? plan_action.dateFin|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ plan_action.description }}</td>
+            </tr>
+            <tr>
+                <th>Objectif</th>
+                <td>{{ plan_action.objectif }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_plan_action_index') }}">back to list</a>
+
+    <a href="{{ path('app_plan_action_edit', {'id': plan_action.id}) }}">edit</a>
+
+    {{ include('plan_action/_delete_form.html.twig') }}
+{% endblock %}

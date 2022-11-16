@@ -1,0 +1,25 @@
+<div class="container" style="margin-left: 40px;">
+    <div class="row">
+        {{ form_start(form, {
+            'attr': {
+                'novalidate': 'novalidate',
+                'class': 'col-lg-8'
+            }
+        })
+        }}
+
+        {{ form_row(form.titre) }}
+        {{ form_row(form.description) }}
+        {{ form_row(form.categorie) }}
+        {{ form_row(form.date_debut) }}
+        {{ form_row(form.date_fin) }}
+        {{ form_row(form.objet) }}
+        {{ form_row(form.pourquoi) }}
+        {{ form_row(form.histoire) }}
+        {{ form_row(form.image) }}
+
+        <button type="submit" class="btn btn-primary">Enregistrer</button>
+        <a href="{{ path('app_projet_index') }}" class="btn btn-success">Retour à la liste</a>
+        {{ form_end(form) }}
+    </div>
+</div>
