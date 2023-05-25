@@ -12,9 +12,9 @@
                     <thead>
                     <tr>
                         <th>Id</th>
-                        <th>Bailleur de Fonds</th>
                         <th>Projet</th>
                         <th>Montant</th>
+                        <th>Date de financement</th>
                         <th>Actions</th>
                     </tr>
                     </thead>
@@ -22,12 +22,12 @@
                     {% for financement in financements %}
                         <tr>
                             <td>{{ financement.id }}</td>
+                            <td>{{ financement.projet.titre }}</td>
                             <td>{{ financement.montant }}</td>
                             <td>{{ financement.createdAt ? financement.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-                            <td>{{ financement.updatedAt ? financement.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
                             <td>
-                                <a href="{{ path('app_financement_show', {'id': financement.id}) }}">show</a>
-                                <a href="{{ path('app_financement_edit', {'id': financement.id}) }}">edit</a>
+                                <a href="{{ path('app_financement_show', {'id': financement.id}) }}">Voir</a>
+                                <a href="{{ path('app_financement_edit', {'id': financement.id}) }}">Editer</a>
                             </td>
                         </tr>
                     {% else %}

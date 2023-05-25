@@ -10,6 +10,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Twilio\Exceptions\ConfigurationException;
+use Twilio\Exceptions\TwilioException;
 
 #[Route('/financement')]
 class FinancementController extends AbstractController
@@ -22,6 +24,10 @@ class FinancementController extends AbstractController
         ]);
     }
 
+    /**
+     * @throws ConfigurationException
+     * @throws TwilioException
+     */
     #[Route('/new', name: 'app_financement_new', methods: ['GET', 'POST'])]
     public function new(Request $request, FinancementRepository $financementRepository): Response
     {
@@ -31,7 +37,7 @@ class FinancementController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $financementRepository->save($financement, true);
-            NotificationService::sendSMS($financement->getProjet()->getUser()->getTelephone(), "Votre projet a  plan financier a été financé avec $planFinancier->getMontant() FCFA. Merci de votre confiance.");
+            NotificationService::sendSMS('+243810952606', "Votre projet a  plan financier a été financé avec" . $financement->getMontant() . "FCFA. Merci de votre confiance.");
 
             return $this->redirectToRoute('app_financement_index', [], Response::HTTP_SEE_OTHER);
         }

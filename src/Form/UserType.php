@@ -46,14 +46,6 @@ class UserType extends AbstractType
                 'label' => 'Image',
                 'required' => false
             ])
-            ->add('roles', ChoiceType::class,[
-                'label' => 'Roles',
-                'required' => true,
-                'choices' => [
-                    'Porteur de Projet' => Roles::PROJECT_OWNER,
-                    'Investisseur' => Roles::INVESTOR
-                ]
-            ])
             ->add('password', PasswordType::class, [
                 'label' => 'Mot de passe'
             ])

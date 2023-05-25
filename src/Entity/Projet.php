@@ -76,8 +76,8 @@ class Projet
     #[ORM\ManyToOne(inversedBy: 'projets')]
     private ?Categorie $categorie = null;
 
-    #[ORM\ManyToOne(inversedBy: 'projet')]
-    private ?Financement $financement = null;
+    #[ORM\OneToMany(mappedBy: 'projet', targetEntity: Financement::class)]
+    private Collection $financements;
 
 
     public function __construct()
@@ -86,6 +86,7 @@ class Projet
         $this->plan_action = new ArrayCollection();
         $this->plan_communication = new ArrayCollection();
         $this->updatedAt = new \DateTime();
+        $this->financements = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -330,16 +331,33 @@ class Projet
         return $this;
     }
 
-    public function getFinancement(): ?Financement
+    /**
+     * @return Collection<int, Financement>
+     */
+    public function getFinancements(): Collection
     {
-        return $this->financement;
+        return $this->financements;
     }
 
-    public function setFinancement(?Financement $financement): self
+    public function addFinancement(Financement $financement): self
     {
-        $this->financement = $financement;
+        if (!$this->financements->contains($financement)) {
+            $this->financements->add($financement);
+            $financement->setProjet($this);
+        }
 
         return $this;
     }
 
+    public function removeFinancement(Financement $financement): self
+    {
+        if ($this->financements->removeElement($financement)) {
+            // set the owning side to null (unless already changed)
+            if ($financement->getProjet() === $this) {
+                $financement->setProjet(null);
+            }
+        }
+
+        return $this;
+    }
 }

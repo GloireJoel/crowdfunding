@@ -16,7 +16,7 @@
     <!-- Style -->
     <link rel="stylesheet" href="/css/style.css">
 
-    <title>Connexion</title>
+    <title>Enregistrement</title>
 </head>
 <body>
 <div class="content">
@@ -29,10 +29,10 @@
                 <div class="row justify-content-center">
                     <div class="col-md-8">
                         <div class="mb-4">
-                            <h3>Se Connecter</h3>
-                            <p class="mb-4">Connectez-vous pour effectuer votre tache</p>
+                            <h3>S'enregistrer</h3>
+                            <p class="mb-4">Enregistrez-vous pour effectuer votre tache</p>
                         </div>
-                        <form action="#" method="post">
+                        <form action="{{ path('app_user_new') }}" method="post">
                             <div class="form-group first">
                                 <label for="prenom">Prenom</label>
                                 <input type="text" name="prenom" class="form-control" id="prenom" autocomplete="prenom" required autofocus>

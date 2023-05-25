@@ -3,6 +3,9 @@
 namespace App\Form;
 
 use App\Entity\Financement;
+use App\Entity\Projet;
+use App\Repository\ProjetRepository;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -13,8 +16,15 @@ class FinancementType extends AbstractType
     {
         $builder
             ->add('montant')
-            ->add('created_at')
-            ->add('updated_at')
+            ->add('projet', EntityType::class,[
+                    'label' => 'Projet',
+                    //'multiple' => true,
+                    'class' => Projet::class,
+                    'query_builder' => function (ProjetRepository $er) {
+                        return $er->createQueryBuilder('u')
+                            ->orderBy('u.titre', 'ASC');
+                    }, 'choice_label' => 'titre']
+            )
         ;
     }
 

@@ -32,7 +32,7 @@ class NotificationService
      * @throws ConfigurationException
      * @throws TwilioException
      */
-    public static function sendSMS(string $phone, string $text)
+    public static function sendSMS(string $phone)
     {
         // Send an SMS using Twilio's REST API and PHP
         $sid = "AC1fa1c725eeb0298813b52baa8540fc1e"; // Your Account SID from www.twilio.com/console
@@ -41,8 +41,8 @@ class NotificationService
         $message = $client->messages->create(
             $phone, // Text this number
             [
-                'from' => "+17207405974", // From a valid Twilio number
-                'body' => "$text"
+                'from' => "+12542847074", // From a valid Twilio number
+                'body' => 'Votre projet  a été financé. Merci de votre confiance.'
             ]
         );
 

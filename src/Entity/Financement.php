@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Entity;
 
 use App\Repository\FinancementRepository;
@@ -16,9 +18,6 @@ class Financement
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\OneToMany(mappedBy: 'financement', targetEntity: Projet::class)]
-    private Collection $projet;
-
     #[ORM\OneToMany(mappedBy: 'financement', targetEntity: User::class)]
     private Collection $user;
 
@@ -31,10 +30,14 @@ class Financement
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $updated_at = null;
 
+    #[ORM\ManyToOne(inversedBy: 'financements')]
+    private ?Projet $projet = null;
+
+
     public function __construct()
     {
-        $this->projet = new ArrayCollection();
         $this->user = new ArrayCollection();
+        $this->created_at = new \DateTimeImmutable();
     }
 
     public function getId(): ?int
@@ -42,35 +45,6 @@ class Financement
         return $this->id;
     }
 
-    /**
-     * @return Collection<int, Projet>
-     */
-    public function getProjet(): Collection
-    {
-        return $this->projet;
-    }
-
-    public function addProjet(Projet $projet): self
-    {
-        if (!$this->projet->contains($projet)) {
-            $this->projet->add($projet);
-            $projet->setFinancement($this);
-        }
-
-        return $this;
-    }
-
-    public function removeProjet(Projet $projet): self
-    {
-        if ($this->projet->removeElement($projet)) {
-            // set the owning side to null (unless already changed)
-            if ($projet->getFinancement() === $this) {
-                $projet->setFinancement(null);
-            }
-        }
-
-        return $this;
-    }
 
     /**
      * @return Collection<int, User>
@@ -134,6 +108,18 @@ class Financement
     public function setUpdatedAt(?\DateTimeInterface $updated_at): self
     {
         $this->updated_at = $updated_at;
+
+        return $this;
+    }
+
+    public function getProjet(): ?Projet
+    {
+        return $this->projet;
+    }
+
+    public function setProjet(?Projet $projet): self
+    {
+        $this->projet = $projet;
 
         return $this;
     }
