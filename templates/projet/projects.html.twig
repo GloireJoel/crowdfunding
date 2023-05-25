@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mchango System{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <a href="{{ path('app_projet_new') }}" class="btn btn-primary" style="float: right;">Nouveau
+                    projet</a><br>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Titre</th>
+                        <th>Date debut</th>
+                        <th>Date fin</th>
+                        <th>Objet</th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for projet in projects %}
+                        <tr>
+                            <td scope="row">{{ projet.id }}</td>
+                            <td>{{ projet.titre }}</td>
+                            <td>{{ projet.dateDebut ? projet.dateDebut|date('Y-m-d') : '' }}</td>
+                            <td>{{ projet.dateFin ? projet.dateFin|date('Y-m-d') : '' }}</td>
+                            <td>{{ projet.objet }}</td>
+                            <td>
+                                <a href="{{ path('app_projet_show', {'id': projet.id}) }}">
+                                    <button type="button" class="btn btn-primary"><i class="far fa-eye"></i></button>
+                                </a>
+                                <a href="{{ path('app_projet_edit', {'id': projet.id}) }}">
+                                    <button type="button" class="btn btn-success"><i class="fas fa-edit"></i></button>
+                                </a>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="9">no records found</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

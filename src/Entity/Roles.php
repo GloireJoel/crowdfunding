@@ -8,11 +8,10 @@ class Roles
 
     public const ADMIN = 'ROLE_ADMIN';
 
-    public const DIRECTOR = 'ROLE_DIRECTOR';
+    public const PROJECT_OWNER = 'ROLE_PROJECT_OWNER';
 
     public const USER = 'ROLE_USER';
 
-    public const STUDENT = 'ROLE_STUDENT';
+    public const INVESTOR = 'ROLE_PROJECT_OWNER';
 
-    public const INSTRUCTOR = 'ROLE_INSTRUCTOR';
 }

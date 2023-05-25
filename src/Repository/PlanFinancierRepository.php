@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\PlanFinancier;
+use App\Entity\Projet;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -37,6 +38,16 @@ class PlanFinancierRepository extends ServiceEntityRepository
         if ($flush) {
             $this->getEntityManager()->flush();
         }
+    }
+
+    public function somme(Projet $project)
+    {
+        return $this->createQueryBuilder('t')
+            ->andWhere('t.projet = :projet')
+            ->setParameter('projet', $project)
+            ->select('SUM(t.montant) AS somme')
+            ->getQuery()
+            ->getSingleScalarResult();
     }
 
 //    /**

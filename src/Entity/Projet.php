@@ -76,6 +76,9 @@ class Projet
     #[ORM\ManyToOne(inversedBy: 'projets')]
     private ?Categorie $categorie = null;
 
+    #[ORM\ManyToOne(inversedBy: 'projet')]
+    private ?Financement $financement = null;
+
 
     public function __construct()
     {
@@ -323,6 +326,18 @@ class Projet
     public function setCategorie(?Categorie $categorie): self
     {
         $this->categorie = $categorie;
+
+        return $this;
+    }
+
+    public function getFinancement(): ?Financement
+    {
+        return $this->financement;
+    }
+
+    public function setFinancement(?Financement $financement): self
+    {
+        $this->financement = $financement;
 
         return $this;
     }

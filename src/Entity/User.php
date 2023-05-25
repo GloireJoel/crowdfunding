@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -18,6 +19,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
  */
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: '`user`')]
+#[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
@@ -67,6 +69,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Projet::class)]
     private Collection $projets;
+
+    #[ORM\ManyToOne(inversedBy: 'user')]
+    private ?Financement $financement = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $telephone = null;
 
 
     public function __construct()
@@ -149,10 +157,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return (new User())
             ->setPrenom("Caleb")
             ->setGenre("M")
+            ->setTelephone("+243810952606")
             ->setDescription("Administrateur")
             ->setLocalisation("Lubumbashi")
             ->setUpdatedAt(new \DateTime('now'))
             ->setNom("Mukonko")
+            ->setRoles([Roles::USER, Roles::SUPER_ADMIN, Roles::ADMIN])
             ->setEmail($email)
             ;
     }
@@ -286,6 +296,30 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $projet->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getFinancement(): ?Financement
+    {
+        return $this->financement;
+    }
+
+    public function setFinancement(?Financement $financement): self
+    {
+        $this->financement = $financement;
+
+        return $this;
+    }
+
+    public function getTelephone(): ?string
+    {
+        return $this->telephone;
+    }
+
+    public function setTelephone(string $telephone): self
+    {
+        $this->telephone = $telephone;
 
         return $this;
     }

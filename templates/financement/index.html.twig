@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Financements{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <a href="{{ path('app_financement_new') }}" class="btn btn-primary" style="float: right;">Nouveau
+                    Financement</a><br>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Bailleur de Fonds</th>
+                        <th>Projet</th>
+                        <th>Montant</th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for financement in financements %}
+                        <tr>
+                            <td>{{ financement.id }}</td>
+                            <td>{{ financement.montant }}</td>
+                            <td>{{ financement.createdAt ? financement.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                            <td>{{ financement.updatedAt ? financement.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                            <td>
+                                <a href="{{ path('app_financement_show', {'id': financement.id}) }}">show</a>
+                                <a href="{{ path('app_financement_edit', {'id': financement.id}) }}">edit</a>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="9">no records found</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

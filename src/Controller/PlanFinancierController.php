@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\PlanFinancier;
 use App\Form\PlanFinancierType;
 use App\Repository\PlanFinancierRepository;
+use App\Service\NotificationService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -30,7 +31,6 @@ class PlanFinancierController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $planFinancierRepository->save($planFinancier, true);
-
             return $this->redirectToRoute('app_plan_financier_index', [], Response::HTTP_SEE_OTHER);
         }
 
