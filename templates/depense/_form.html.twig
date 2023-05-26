@@ -1,0 +1,14 @@
+<div class="container" style="margin-left: 40px;">
+    <div class="row">
+        {{ form_start(form, {
+            'attr': {
+                'novalidate': 'novalidate',
+                'class': 'col-lg-8'
+            }
+        })
+        }}
+
+        {{ form_row(form.montant) }}
+        {{ form_row(form.motif) }}
+    <button class="btn">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }}

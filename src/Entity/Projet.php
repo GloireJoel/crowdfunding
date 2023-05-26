@@ -79,6 +79,9 @@ class Projet
     #[ORM\OneToMany(mappedBy: 'projet', targetEntity: Financement::class)]
     private Collection $financements;
 
+    #[ORM\OneToMany(mappedBy: 'projet', targetEntity: Depense::class)]
+    private Collection $depenses;
+
 
     public function __construct()
     {
@@ -87,6 +90,7 @@ class Projet
         $this->plan_communication = new ArrayCollection();
         $this->updatedAt = new \DateTime();
         $this->financements = new ArrayCollection();
+        $this->depenses = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -355,6 +359,36 @@ class Projet
             // set the owning side to null (unless already changed)
             if ($financement->getProjet() === $this) {
                 $financement->setProjet(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Depense>
+     */
+    public function getDepenses(): Collection
+    {
+        return $this->depenses;
+    }
+
+    public function addDepense(Depense $depense): self
+    {
+        if (!$this->depenses->contains($depense)) {
+            $this->depenses->add($depense);
+            $depense->setProjet($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDepense(Depense $depense): self
+    {
+        if ($this->depenses->removeElement($depense)) {
+            // set the owning side to null (unless already changed)
+            if ($depense->getProjet() === $this) {
+                $depense->setProjet(null);
             }
         }
 

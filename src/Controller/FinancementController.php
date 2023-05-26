@@ -37,7 +37,7 @@ class FinancementController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $financementRepository->save($financement, true);
-            NotificationService::sendSMS('+243810952606', "Votre projet a  plan financier a été financé avec" . $financement->getMontant() . "FCFA. Merci de votre confiance.");
+            NotificationService::sendSMS('+243810952606', "Votre projet a  plan financier a été financé avec" . $financement->getMontant() . "Merci de votre confiance.");
 
             return $this->redirectToRoute('app_financement_index', [], Response::HTTP_SEE_OTHER);
         }

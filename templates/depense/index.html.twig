@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Depense{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <a href="{{ path('app_depense_new') }}" class="btn btn-primary" style="float: right;">Nouvelle
+                Depense</a><br>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Motif</th>
+                    <th>Montant</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+        <tbody>
+        {% for depense in depenses %}
+            <tr>
+                <td>{{ depense.id }}</td>
+                <td>{{ depense.motif }}</td>
+                <td>{{ depense.montant }}</td>
+                <td>
+                    <a href="{{ path('app_depense_show', {'id': depense.id}) }}">show</a>
+                    <a href="{{ path('app_depense_edit', {'id': depense.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_depense_new') }}">Create new</a>
+{% endblock %}
