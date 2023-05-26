@@ -32,58 +32,34 @@
                             <h3>S'enregistrer</h3>
                             <p class="mb-4">Enregistrez-vous pour effectuer votre tache</p>
                         </div>
-                        <form action="{{ path('app_user_new') }}" method="post">
-                            <div class="form-group first">
-                                <label for="prenom">Prenom</label>
-                                <input type="text" name="prenom" class="form-control" id="prenom" autocomplete="prenom" required autofocus>
+                        {{ form_start(registrationForm) }}
+                        {{ form_row(registrationForm.prenom, {
+                            label: 'Prenom'
+                        }) }}
+                        {{ form_row(registrationForm.nom, {
+                            label: 'Nom'
+                        }) }}
+                        {{ form_row(registrationForm.genre, {
+                            label: 'Genre'
+                        }) }}
+                        {{ form_row(registrationForm.roles, {
+                            label: 'Roles'
+                        }) }}
+                        {{ form_row(registrationForm.email, {
+                            label: 'Email'
+                        }) }}
+                        {{ form_row(registrationForm.plainPassword, {
+                            label: 'Password'
+                        }) }}
+                        {{ form_row(registrationForm.localisation, {
+                            label: 'Localisation'
+                        }) }}
 
-                            </div>
-                            <div class="form-group first">
-                                <label for="nom">Nom</label>
-                                <input type="text"  name="nom" class="form-control" id="nom" autocomplete="nom" required autofocus>
-
-                            </div>
-
-                            <div class="form-group first">
-                                <label for="genre">Genre</label>
-                                <p>Homme<input type="radio"  name="genre" value="M"   required></p>
-                                <p>Femme<input type="radio"  name="genre" value="F"   required></p>
-
-                            </div>
-                            <p class="form-group second">
-                                <label for="roles">Profile</label>
-                                <p>Investisseur<input type="radio"  name="roles" value="INVESTOR"   required autofocus></p>
-                                <p>Porteur de projet<input type="radio"  name="roles" value="PROJECT_OWNER" required autofocus></p>
-
-                            </div>
-                            <div class="form-group first">
-                                <label for="username">Adresse Email</label>
-                                <input type="email" value="" name="email" class="form-control" id="email" autocomplete="email" required autofocus>
-
-                            </div>
-                            <div class="form-group last mb-4">
-                                <label for="password">Mot de Passe</label>
-                                <input type="password" name="password" class="form-control" id="password" autocomplete="current-password" required>
-
-                            </div>
-
-                            <div class="form-group last mb-4">
-                                <label for="localisation">Localisation</label>
-                                <input type="text" name="localisation" class="form-control" id="localisation" required>
-
-                            </div>
-
-                            <div class="form-group last mb-4">
-                                <label for="description">Description</label>
-                                <input type="text" name="description" class="form-control" id="description" required>
-
-                            </div>
-                            <input type="hidden" name="_csrf_token"
-                                   value="{{ csrf_token('authenticate') }}"
-                            >
-
-                            <input type="submit" value="Creer Compte" class="btn btn-block btn-primary">
-                        </form>
+                        {{ form_row(registrationForm.description, {
+                            label: 'Description'
+                        }) }}
+                        <button type="submit" class="btn btn-primary btn-lg">Créer Compte</button>
+                        {{ form_end(registrationForm) }}
                     </div>
                 </div>
 
